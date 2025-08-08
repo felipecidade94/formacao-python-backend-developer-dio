@@ -174,3 +174,5 @@ cython_debug/
 .pypirc
 tests/
 init_admin.py
+migrations/
+comandos.md

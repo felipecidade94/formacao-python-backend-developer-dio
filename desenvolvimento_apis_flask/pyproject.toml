@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "api-flask-city"
+version = "0.1.0"
+description = "API Flask com SQLAlchemy, JWT, Blueprints, Migrations e Roles"
+authors = [
+   { name = "Cidade", email = "felipecidade94@gmail.com" }
+]
+dependencies = [
+   "Flask",
+   "Flask-SQLAlchemy",
+   "Flask-Migrate",
+   "Flask-JWT-Extended",
+   "SQLAlchemy",
+   "pytest"
+]
+
+[tool.pytest.ini_options]
+addopts = "-v --tb=short"
+testpaths = ["tests"]
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+
+[tool.isort]
+profile = "black"

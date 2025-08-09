@@ -176,4 +176,4 @@ tests/
 init_admin.py
 migrations/
 comandos.md
-olds/
+old/

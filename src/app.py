@@ -1,3 +1,4 @@
+import contextlib
 from flask import Flask, current_app
 from flask_migrate import Migrate
 import sqlalchemy as sa
@@ -60,17 +61,15 @@ def create_app(test_config = None):
       SQLALCHEMY_DATABASE_URI ='sqlite:///blog.db',
       JWT_SECRET_KEY = 'super-secret',
    )
-   
+
    if test_config is None:
       app.config.from_pyfile('config.py', silent=True)
    else:
       app.config.from_mapping(test_config)
-   
-   try:
+
+   with contextlib.suppress(OSError):
       os.makedirs(app.instance_path)
-   except OSError:
-      pass
-   
+      
    app.cli.add_command(init_db_command)
    db.init_app(app)
    migrate.init_app(app, db)
@@ -78,9 +77,9 @@ def create_app(test_config = None):
    # @app.route('/hello_world')
    # def hello_world():
    #    return '<h1>Hello, World!</h1>'
-   
+
    from src.controllers import post, user, auth, role
-   
+
    app.register_blueprint(user.app)
    app.register_blueprint(post.app)
    app.register_blueprint(auth.app)
